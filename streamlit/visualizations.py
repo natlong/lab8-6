@@ -55,17 +55,15 @@ def plot_bar_graph(data, x_col):
     
     data.plot(kind='bar', color='skyblue')
 
-def plot_pie_chart(data, column):
+def plot_pie_chart(sizes, job):
     plt.figure(figsize=(8,8))
-    plt.pie(values=column, names=data)
-    plt.title('IT Entry Level Jobs')
+    plt.pie(values=sizes, names=job, title="IT Entry Level Jobs")
     plt.axis('equal')
     plt.plot()
 
-def plot_pie_chart(data, column):
+def plot_pie_chart(sizes, labels):
     plt.figure(figsize=(8,8))
-    plt.pie(values=column, names=data)
-    plt.title('Education for IT Jobs')
+    plt.pie(values=sizes, names=labels, title="Education for IT Jobs")
     plt.axis('equal')
     plt.plot()
 
@@ -154,89 +152,6 @@ def visualisations():
 
     # Display pie chart 
     st.plotly_chart(fig)
-
-def visualisations():
-    #Initialize Dataset
-    companyengagement_df = initialize_companyengagement_dataset()
-
-    # Prepare data for radar chart
-    categories = list(companyengagement_df.columns)
-    values = companyengagement_df.mean().tolist()
-
-    # Print categories and values to check them
-    st.write("Categories:", categories)
-    st.write("Values:", values)
-
-    # Function to create radar chart
-    def create_radar_chart(categories, values):
-        fig = px.line_polar(r=values, theta=categories, line_close=True)
-        fig.update_traces(fill='toself')
-        return fig
-
-    # Function to update chart layout with title
-    def add_title(fig, title):
-        fig.update_layout(
-            title=title,
-            polar=dict(
-                radialaxis=dict(
-                    visible=True,
-                    range=[0, 5]
-                )
-            ),
-            showlegend=False
-        )
-        return fig
-
-    # Create radar chart
-    fig = create_radar_chart(categories, values)
-
-    # Add title to the chart
-    fig = add_title(fig, "Employer Branding Radar Chart")
-
-    # Display chart
-    st.plotly_chart(fig)
-
-
-# ================== Radar Chart Code ==================
-
-
-# # Load data for radar chart
-# if radar_file_path:
-#     df_radar = pd.read_excel(radar_file_path)
-
-# # Prepare data for radar chart
-# categories = list(df_radar.columns)
-# values = df_radar.mean().tolist()
-
-# # Function to create radar chart
-# def create_radar_chart(categories, values):
-#     fig = px.line_polar(r=values, theta=categories, line_close=True)
-#     fig.update_traces(fill='toself')
-#     return fig
-
-# # Function to update chart layout with title
-# def add_title(fig, title):
-#     fig.update_layout(
-#         title=title,
-#         polar=dict(
-#             radialaxis=dict(
-#                 visible=True,
-#                 range=[0, 5]
-#             )
-#         ),
-#         showlegend=False
-#     )
-#     return fig
-
-# # Create radar chart
-# fig = create_radar_chart(categories, values)
-
-# # Add title to the chart
-# fig = add_title(fig, "Company Engagement Radar Chart")
-
-# # Display chart
-# st.plotly_chart(fig)
-
 
 
 
